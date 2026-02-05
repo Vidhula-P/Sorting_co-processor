@@ -16,7 +16,7 @@ module testbench;
     
     $display("\nSV received: arr=%0p", arr);
     
-    // Store count of occurrences in count[]
+    // Store count of occurrences of a digit in count[digit]
     for (int i = 0; i < n; i++) begin
       count[(arr[i] / exp) % 10]+=1;
     end
@@ -24,8 +24,9 @@ module testbench;
     $display("Step 1: count = %p",count);
     
     // Change count[i] so that count[i] now 
-    // contains actual position of this digit
-    // in output[]
+    // contains actual position+1 of this digit in output[]
+    // Ex if count[0] = 6 and count[1] = 2, 0 needs to be 0-5 and 1 will be in 6-7
+    // Notice the "-1" in the next loop
     for (int i = 1; i < 10; i++) begin
       count[i] += count[i - 1]; // cumulative add
     end
@@ -33,6 +34,7 @@ module testbench;
     $display("Step 2: count = %p",count);
     
     // Build the output array
+    // since for one digit, count sort preserves insertion order, we start from end of array
     for (int i = n - 1; i >= 0; i--) begin
         out[count[(arr[i] / exp) % 10] - 1] = arr[i];
         count[(arr[i] / exp) % 10]--;
@@ -45,7 +47,7 @@ module testbench;
         arr[i] = out[i];
     end
     
-    $display("Step 4: out = %p",out);
+    $display("Step 4: arr = %p",arr);
     
   endfunction
 
