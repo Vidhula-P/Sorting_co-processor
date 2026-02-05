@@ -8,11 +8,11 @@ extern "C" void call_sv_from_c();
 extern "C" int sv_sort(int *arr);
 
 void call_sv_from_c() {
-  int arr [5] = {10,6,2,4,5};
+  int arr [4] = {6,2,4,5};
   
   sv_sort(arr);
   printf("C got sorted array: ");
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < 4; i++)
     printf("%d ", arr[i]);
   
   printf("\n");

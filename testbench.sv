@@ -6,10 +6,11 @@ module testbech;
   // Export SV function to C
   export "DPI-C" function sv_sort;
 
-  function void sv_sort(inout int arr[5]);
+  // cannot pass dynamic array in export function
+  function void sv_sort(inout int arr[4]);
     int i, j, key;
     $display("\nSV received: arr=%0p", arr);
-    for(i=1; i<5; i++) begin
+    for(i=1; i<4; i++) begin
       key = arr[i]; // current element being considered
       j = i-1;
       while (j>=0 && key<arr[j]) begin
